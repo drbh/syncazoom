@@ -4,3 +4,4 @@ services:
     build: .
     volumes:
       - ${PWD}/config.toml:/config.toml 
+      - ${PWD}/meetings.sql3:/meetings.sql3

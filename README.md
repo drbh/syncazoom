@@ -4,6 +4,8 @@ Zoom is an imporant tool for online communication. Especially in these times of 
 
 This tool is made to help you manage API calls to Zoom and make it easy to store a local copy of Zoom meeting metrics.
 
+# Getting Started 
+
 ### Add your keys
 
 copy the example file and rename it to `config.toml`
@@ -14,8 +16,7 @@ secret = "EXAMPLE"
 
 [settings]
 seconds_between_calls = 60
-#               sec  min         hours       	day of month   month   day of week   year
-cron_interval = "0   0     3,6,9,12,15,18,21     	  *          *      Mon-Fri       *"
+cron_interval = "0 0 3,6,9,12,15,18,21 * * Mon-Fri *"
 
 [slack]
 webhook = "EXAMPLE"
@@ -27,21 +28,27 @@ webhook = "EXAMPLE"
 cargo install syncazoom
 ```
 
-
-### Install from source
-```bash
-# install rust
-cargo build --release
-```
-
-
 ### Run app
 ```bash
 syncazoom -c config.toml
 ```
 
 
-### Example Output
+### Query
+```bash
+sqlite3 meetings.sql3 
+# SQLite version 3.28.0 2019-04-15 14:49:49
+# Enter ".help" for usage hints.
+# sqlite> 
+```
+
+Then enter the following (or more useful) SQL
+```sql
+SELECT * FROM meetings LIMIT 10;
+```
+
+
+# Example Output
 ```
 03/04/2020 08:57:00
 Start run
@@ -84,21 +91,17 @@ Total Estimated Runtime 50 mins
 └── Next Page Token: "k89o4smQsnuOGt03Z0h57EU1u3vYe0GU9a2"
 ```
 
+# Developer
+
+
+### Install from source
+```bash
+# install rust
+cargo build --release
+```
+
 ### How it works
 
 An essential concept of syncazoom is it's heartbeat. At some interval, it will check if it is currently fetching data - and if not, it will start the process. 
 
 The process makes a call to Zoom's metrics API, and then it stores the data in a local instance of sqlite3. We only "insert or replace" on each uuid so we never have duplicate entries.
-
-### Query
-```bash
-sqlite3 meetings.sql3 
-# SQLite version 3.28.0 2019-04-15 14:49:49
-# Enter ".help" for usage hints.
-# sqlite> 
-```
-
-Then enter the following (or more useful) SQL
-```sql
-SELECT * FROM meetings LIMIT 10;
-```
