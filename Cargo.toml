@@ -27,4 +27,4 @@ chrono = "0.4.11"
 
 
 [build-dependencies]
-clippy = { version = "*", optional = true }
+clippy = { version = "0.0.302", optional = true }
