@@ -1,6 +1,6 @@
 # syncazoom
 
-**THIS APP IS IN DEVELOPMENT AND IS SUBJECT TO CHANGE. DO NOT EXPECT STABLE FEATURES UNTIL VERSION 1.0**
+**THIS APP IS IN DEVELOPMENT AND IS SUBJECT TO CHANGE. DO NOT EXPECT STABLE FEATURES UNTIL VERSION 1.0.0**
 
 Zoom is an imporant tool for online communication. Especially in these times of social distancing
 

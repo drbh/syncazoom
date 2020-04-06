@@ -117,7 +117,7 @@ o.  )88b    `888'     888   888  888   .o8 d8(  888   .d8P'  .P 888   888 888   
         Err(err) => println!("{:#?}", err), // if fail - should stop
     };
 
-    println!("-");
+    println!("Finished execute");
 }
 
 pub fn send_slack_message(webhook: &str, message: &str) -> String {
