@@ -1,5 +1,7 @@
 # syncazoom
 
+**THIS APP IS IN DEVELOPMENT AND IS SUBJECT TO CHANGE. DO NOT EXPECT STABLE FEATURES UNTIL VERSION 1.0**
+
 Zoom is an imporant tool for online communication. Especially in these times of social distancing
 
 This tool is made to help you manage API calls to Zoom and make it easy to store a local copy of Zoom meeting metrics.
