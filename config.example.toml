@@ -1,0 +1,13 @@
+[creds]
+key = "EXAMPLE"
+secret = "EXAMPLE"
+
+[settings]
+seconds_between_calls = 60
+#               sec  min         hours       	day of month   month   day of week   year
+cron_interval = "0   0     3,6,9,12,15,18,21     	  *          *      Mon-Fri       *"
+
+single_run = false
+
+[slack]
+webhook = "EXAMPLE"

@@ -636,6 +636,7 @@ dependencies = [
  "argh",
  "chrono",
  "clippy",
+ "cron",
  "job_scheduler",
  "jsonwebtoken",
  "minreq",

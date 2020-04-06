@@ -1,5 +1,12 @@
 use crate::*;
 
+pub fn print_time() {
+    let start = SystemTime::now();
+    let datetime: DateTime<Utc> = start.into();
+    println!("{}", datetime.format("%d/%m/%Y %T"));
+}
+
+/// Iterates through ZoomResponse and inserts to database
 pub fn save_all_meetings(data: &ZoomResponse) {
     for meeting in &data.meetings {
         // println!("{:#?}", &meeting);
@@ -111,4 +118,16 @@ o.  )88b    `888'     888   888  888   .o8 d8(  888   .d8P'  .P 888   888 888   
     };
 
     println!("-");
+}
+
+pub fn send_slack_message(webhook: &str, message: &str) -> String {
+    let mut final_url = webhook.to_string();
+    println!("Slack URL\t | {}", final_url);
+    let slack_message = format!("{{ \"text\": \"{}\" }}", message);
+    let response = minreq::post(final_url)
+        .with_header("Content-type", "application/json")
+        .with_body(slack_message)
+        .send()
+        .unwrap();
+    response.json().unwrap_or(String::from(""))
 }

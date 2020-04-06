@@ -9,18 +9,29 @@ This tool is made to help you manage API calls to Zoom and make it easy to store
 copy the example file and rename it to `config.toml`
 ```toml
 [creds]
-key = "YOUR-KEY"
-secret = "YOUR-SECRET"
+key = "EXAMPLE"
+secret = "EXAMPLE"
 
 [settings]
 seconds_between_calls = 60
-cron_interval = "0/10 * * * * *"
+#               sec  min         hours       	day of month   month   day of week   year
+cron_interval = "0   0     3,6,9,12,15,18,21     	  *          *      Mon-Fri       *"
+
+[slack]
+webhook = "EXAMPLE"
 ```
 
-### Install
+### Install from cargo (not complete)
 ```bash
 # install rust
 cargo install syncazoom
+```
+
+
+### Install from source
+```bash
+# install rust
+cargo build --release
 ```
 
 

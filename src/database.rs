@@ -1,5 +1,7 @@
 use crate::*;
 
+/// Open a sqlite3 connection and insert or replace a meeting
+/// We use the SQL commands `INSERT OR REPLACE` in order to overwrite any existing values.
 pub fn insert_meeting(meeting: Meeting) -> rusqlite::Result<()> {
     let conn = Connection::open("meetings.sql3")?;
     conn.execute(
