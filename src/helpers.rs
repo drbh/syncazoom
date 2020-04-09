@@ -10,7 +10,7 @@ pub fn print_time() {
 pub fn save_all_meetings(data: &ZoomResponse) {
     for meeting in &data.meetings {
         // println!("{:#?}", &meeting);
-        insert_meeting(meeting.clone());
+        let _successful_insert: bool = insert_meeting(meeting.clone()).is_ok();
     }
 }
 
@@ -121,7 +121,7 @@ o.  )88b    `888'     888   888  888   .o8 d8(  888   .d8P'  .P 888   888 888   
 }
 
 pub fn send_slack_message(webhook: &str, message: &str) -> String {
-    let mut final_url = webhook.to_string();
+    let final_url = webhook.to_string();
     println!("Slack URL\t | {}", final_url);
     let slack_message = format!("{{ \"text\": \"{}\" }}", message);
     let response = minreq::post(final_url)

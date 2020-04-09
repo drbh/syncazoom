@@ -42,6 +42,10 @@ pub fn fetch_zoom_data(
         final_url = format!("{}&next_page_token={}", final_url, next_page_token.unwrap())
     }
 
+    if false {
+        final_url = format!("{}&from={}&to={}", final_url, "2020-04-03", "2020-04-03")
+    }
+
     // println!("-- DOWNLOADING --");
     println!("URL \t\t | {}", final_url);
 

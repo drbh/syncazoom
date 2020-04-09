@@ -1,4 +1,5 @@
 /target
 config.toml
 meetings.sql3
+bak.meetings.sql3
 build_docs.sh
