@@ -160,11 +160,13 @@ fn main() -> Result<(), Error> {
             send_slack_message(&slack_webhook, " - 🏃‍♀️ Stating scraper");
             let _key = key.clone();
             let _secr = secr.clone();
-            execute(
+            let _single_run_results = execute(
                 _key.to_string(),
                 _secr.to_string(),
                 seconds_between_calls as u64,
             );
+            // println!("{}", _single_run_results.to_string());
+            send_slack_message(&slack_webhook, &_single_run_results.to_string());
             send_slack_message(&slack_webhook, " - ✅ Complete process");
         }
         false => {
@@ -198,7 +200,7 @@ fn main() -> Result<(), Error> {
 
                     let swh = slack_webhook.clone();
                     thread::spawn(move || {
-                        execute(
+                        let _multi_run_results = execute(
                             _key.to_string(),
                             _secr.to_string(),
                             seconds_between_calls as u64,

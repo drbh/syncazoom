@@ -50,3 +50,18 @@ pub fn insert_meeting(meeting: Meeting) -> rusqlite::Result<()> {
     )?;
     Ok(())
 }
+
+/// WARNING: this function is not used currently
+/// and the same logic is implemented by the Python sctipt
+/// that consumes the data from the DB.
+/// Over time that Python script may be ported to this repo
+/// Open a sqlite3 connection and drop the table
+/// we also need to vacuum up the freed space
+pub fn _drop_table_and_clear_memory() -> rusqlite::Result<()> {
+    let conn = Connection::open("meetings.sql3")?;
+    // lets drop the table
+    conn.execute("DROP TABLE meetings;", params![])?;
+    // we need to clean up the space
+    conn.execute("VACUUM;", params![])?;
+    Ok(())
+}

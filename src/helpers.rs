@@ -54,7 +54,7 @@ pub struct GoUp {
     pub config: String,
 }
 
-pub fn execute(key: String, secret: String, seconds_between_calls: u64) {
+pub fn execute(key: String, secret: String, seconds_between_calls: u64) -> ZoomResults {
     println!(
         r#"                                                                                                     
                                                                                                       
@@ -69,6 +69,7 @@ o.  )88b    `888'     888   888  888   .o8 d8(  888   .d8P'  .P 888   888 888   
     );
     let zm_response = fetch_zoom_data(&key, &secret, None);
     let mut next_page_token;
+    let mut current_page_number: usize = 0;
     match zm_response {
         Ok(data) => {
             println!(
@@ -85,6 +86,7 @@ o.  )88b    `888'     888   888  888   .o8 d8(  888   .d8P'  .P 888   888 888   
             thread::sleep(Duration::from_secs(seconds_between_calls)); // before we do next
 
             for _n in 2..data.page_count + 1 {
+                current_page_number = _n;
                 let zm_response = fetch_zoom_data(&key, &secret, Some(&next_page_token));
                 let successful_resp: bool = match zm_response {
                     Ok(response) => {
@@ -117,7 +119,34 @@ o.  )88b    `888'     888   888  888   .o8 d8(  888   .d8P'  .P 888   888 888   
         Err(err) => println!("{:#?}", err), // if fail - should stop
     };
 
-    println!("Finished execute");
+    ZoomResults {
+        message: String::from("Finished execute"),
+        page_count: current_page_number,
+        total_records: current_page_number * 300,
+    }
+    // println!("Finished execute");
+    // String::from("Finished execute")
+}
+
+#[derive(Debug)]
+pub struct ZoomResults {
+    message: String,
+    page_count: usize,
+    total_records: usize,
+}
+
+use std::fmt;
+
+impl fmt::Display for ZoomResults {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        // let mut str = "";
+        // fmt.write_str(str)?;
+        // fmt.write_str(&self.message)?;
+        fmt.write_fmt(format_args!("Message:  {}", self.message))?;
+        fmt.write_fmt(format_args!("\nPages:  {}", self.page_count))?;
+        fmt.write_fmt(format_args!("\nRecorded:  {}", self.total_records))?;
+        Ok(())
+    }
 }
 
 pub fn send_slack_message(webhook: &str, message: &str) -> String {
